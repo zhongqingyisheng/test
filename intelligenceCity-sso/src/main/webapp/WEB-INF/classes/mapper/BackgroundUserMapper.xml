@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zdxfinfo.sso.dao.BackgroundUserMapper">
+	<resultMap id="BaseResultMap"
+		type="com.zdxfinfo.sso.bean.BackgroundUser">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="real_name" jdbcType="VARCHAR"
+			property="realName" />
+		<result column="mobile" jdbcType="CHAR" property="mobile" />
+		<result column="office_phone" jdbcType="VARCHAR"
+			property="officePhone" />
+		<result column="office_address" jdbcType="VARCHAR"
+			property="officeAddress" />
+		<result column="home_address" jdbcType="VARCHAR"
+			property="homeAddress" />
+		<result column="status" jdbcType="BIT" property="status" />
+		<result column="user_name" jdbcType="VARCHAR"
+			property="userName" />
+		<result column="password" jdbcType="VARCHAR"
+			property="password" />
+		<result column="user_head" jdbcType="VARCHAR"
+			property="userHead" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP"
+			property="updateTime" />
+		<result column="salt" jdbcType="VARCHAR" property="salt" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, real_name, mobile, office_phone, office_address, home_address,
+		status, user_name, password, user_head, remark, create_time,
+		update_time,salt
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_background_user
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from t_background_user
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.zdxfinfo.sso.bean.BackgroundUser">
+		<selectKey keyProperty="id" order="AFTER"
+			resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into t_background_user ( real_name, mobile,
+		office_phone, office_address, home_address,
+		status, user_name, password,
+		user_head, remark, create_time,
+		update_time)
+		values (#{institutionId,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR},
+		#{mobile,jdbcType=CHAR},
+		#{officePhone,jdbcType=VARCHAR}, #{officeAddress,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR},
+		#{status,jdbcType=BIT}, #{userName,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{userHead,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.zdxfinfo.sso.bean.BackgroundUser">
+		<selectKey keyProperty="id" order="AFTER"
+			resultType="java.lang.Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into t_background_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+
+			<if test="realName != null">
+				real_name,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="officePhone != null">
+				office_phone,
+			</if>
+			<if test="officeAddress != null">
+				office_address,
+			</if>
+			<if test="homeAddress != null">
+				home_address,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="userHead != null">
+				user_head,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=CHAR},
+			</if>
+			<if test="officePhone != null">
+				#{officePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="officeAddress != null">
+				#{officeAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="homeAddress != null">
+				#{homeAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=BIT},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userHead != null">
+				#{userHead,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.zdxfinfo.sso.bean.BackgroundUser">
+		update t_background_user
+		<set>
+			<if test="realName != null">
+				real_name = #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile,jdbcType=CHAR},
+			</if>
+			<if test="officePhone != null">
+				office_phone = #{officePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="officeAddress != null">
+				office_address = #{officeAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="homeAddress != null">
+				home_address = #{homeAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=BIT},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="userHead != null">
+				user_head = #{userHead,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.zdxfinfo.sso.bean.BackgroundUser">
+		update t_background_user
+		set
+		real_name = #{realName,jdbcType=VARCHAR},
+		mobile = #{mobile,jdbcType=CHAR},
+		office_phone = #{officePhone,jdbcType=VARCHAR},
+		office_address = #{officeAddress,jdbcType=VARCHAR},
+		home_address = #{homeAddress,jdbcType=VARCHAR},
+		status = #{status,jdbcType=BIT},
+		user_name = #{userName,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		user_head = #{userHead,jdbcType=VARCHAR},
+		remark = #{remark,jdbcType=VARCHAR},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- <select id="findByUsername" parameterType="java.lang.String" resultMap="BaseResultMap"> 
+		select <include refid="Base_Column_List" /> from t_background_user where 
+		user_name = #{userName} </select> -->
+
+	<select id="findByUsername" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_background_user
+		WHERE 1=1 AND (user_name = #{username} OR mobile=#{username})
+	</select>
+</mapper>
